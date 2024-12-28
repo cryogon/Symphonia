@@ -4,6 +4,7 @@ import path from "node:path";
 import type yts from "yt-search";
 
 const songsFolder = path.resolve(__dirname, "../../songs");
+const cookiesPath = path.resolve(__dirname, "../../cookies.txt");
 
 // downloads song from youtube using youtube-dl
 export async function downloadSong(
@@ -23,7 +24,8 @@ export async function downloadSong(
   } catch {} // dir not exists. no need to log since yt-dlp command will create it automatically
 
   try {
-    await $`yt-dlp --extract-audio --audio-format mp3 -o "${songsFolder}/${title}.%(ext)s" "${url}"`;
+    // passing cookie to it works on server
+    await $`yt-dlp --cookies /path/to/cookies.txt --extract-audio --audio-format mp3 -o "${songsFolder}/${title}.%(ext)s" "${url}"`;
     return true;
   } catch (err) {
     console.error("Failed to download song with url:", url, "err:", err);
