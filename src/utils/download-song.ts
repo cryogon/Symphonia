@@ -25,7 +25,7 @@ export async function downloadSong(
 
   try {
     // passing cookie to it works on server
-    await $`yt-dlp --cookies /path/to/cookies.txt --extract-audio --audio-format mp3 -o "${songsFolder}/${title}.%(ext)s" "${url}"`;
+    await $`yt-dlp --cookies ${cookiesPath} --extract-audio --audio-format mp3 -o "${songsFolder}/${title}.%(ext)s" "${url}"`;
     return true;
   } catch (err) {
     console.error("Failed to download song with url:", url, "err:", err);
