@@ -24,8 +24,7 @@ export async function downloadSong(
   } catch {} // dir not exists. no need to log since yt-dlp command will create it automatically
 
   try {
-    // passing cookie to it works on server
-    await $`yt-dlp --cookies ${cookiesPath} --extract-audio --audio-format mp3 -o "${songsFolder}/${title}.%(ext)s" "${url}"`;
+    await $`yt-dlp --extract-audio --audio-format mp3 -o "${songsFolder}/${title}.%(ext)s" "${url}"`;
     return true;
   } catch (err) {
     console.error("Failed to download song with url:", url, "err:", err);
