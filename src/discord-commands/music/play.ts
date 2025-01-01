@@ -5,7 +5,7 @@ import {
 } from "discord.js";
 import { getGuildChannel } from "../../db/sqlite";
 import { state } from "../../states";
-import { getSource, stripQueryParams } from "../../utils/url";
+import { getSource, parseURL, stripQueryParams } from "../../utils/url";
 
 export const data = new SlashCommandBuilder()
   .setName("play")
@@ -65,7 +65,7 @@ export async function execute(interaction: CommandInteraction) {
   const source = getSource(musicUrl);
   state.addSong(interaction.guildId, {
     requestBy: interaction.user.id,
-    song: source === "Spotify" ? stripQueryParams(musicUrl) : musicUrl,
+    song: parseURL(musicUrl, source),
     voiceChannel: voiceChannel as VoiceBasedChannel,
     source: source,
   });

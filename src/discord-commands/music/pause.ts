@@ -1,7 +1,4 @@
-import {
-  CommandInteraction,
-  SlashCommandBuilder,
-} from "discord.js";
+import { CommandInteraction, SlashCommandBuilder } from "discord.js";
 import { state } from "../../states";
 import { AudioPlayerStatus } from "@discordjs/voice";
 
@@ -16,6 +13,6 @@ export async function execute(interaction: CommandInteraction) {
   state.pauseMusic(interaction.guildId);
   const player = state.getAudioPlayer(interaction.guildId);
   const content =
-    player.state.status === AudioPlayerStatus.Paused ? "Playing" : "Paused";
+    player.state.status === AudioPlayerStatus.Paused ? "Paused" : "Playing";
   await interaction.reply({ content, ephemeral: true });
 }

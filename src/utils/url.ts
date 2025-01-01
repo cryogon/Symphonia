@@ -11,6 +11,7 @@ export function getSource(url: string) {
     }
     return "YT";
   }
+  if (url.startsWith("https://youtu.be")) return "YT";
   throw new Error("Unsupported Link");
 }
 
@@ -31,4 +32,16 @@ export function convertYTMusicURLtoYt(url: string) {
   } catch {
     throw new Error("Invalid URL");
   }
+}
+
+export function parseURL(musicUrl: string, source: string) {
+  const baseUrl = source === "Spotify" ? stripQueryParams(musicUrl) : musicUrl;
+
+  const url = new URL(baseUrl);
+
+  if (source === "YT" && url.hostname === "youtu.be") {
+    return `https://youtube.com/watch?v=${url.pathname.slice(1)}`;
+  }
+
+  return baseUrl;
 }
