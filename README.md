@@ -1,4 +1,6 @@
 # discord-music-bot
+A discord bot, which supports Spotify, Youtube and Youtube-Music. just drop the music link in the discord, and it will play that song in vc, for you and your friends to enjoy together
+
 
 To install dependencies:
 
@@ -12,4 +14,3 @@ To run:
 bun run index.ts
 ```
 
-This project was created using `bun init` in bun v1.1.33. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
